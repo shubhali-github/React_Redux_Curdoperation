@@ -56,25 +56,14 @@ const Company = (props) => {
                       <td>{data.state}</td>
                       <td>{data.city}</td>
                       <td>
-                        <Button onClick={() => onEditfun(data.id)}>
-                          Edit
-                        </Button>
-                      </td>
-                      <td>
-                        <Button onClick={() => onDelete(data._id)}>
-                          Delete
-                        </Button>
-                      </td>
-                      {/* <td>
                         <FontAwesomeIcon
                           icon={faEdit}
-                          onClick={() => setCurrentId(data._id)}
-                        />
+                            onClick={() => onEditfun(data.id)}                        />
                         <FontAwesomeIcon
                           icon={faTrash}
                           onClick={() => onDelete(data._id)}
                         />
-                      </td> */}
+                      </td>
                     </tr>
                   );
                 })}

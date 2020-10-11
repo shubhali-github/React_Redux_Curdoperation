@@ -74,7 +74,7 @@ const ComapnyData = (props) => {
       <>
         <Row className="p-0 m-0 " style={{ height: "100px" }}>
           <Col sm="auto" className="my-auto">
-            <Button variant="primary" onClick={() => setShow(true)}>
+            <Button variant="primary" onClick={() => props.setShow(true)}>
               Add Company Data
             </Button>
           </Col>
