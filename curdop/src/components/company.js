@@ -1,29 +1,34 @@
 import {connect} from 'react-redux'
-import React ,{useEffect,useState,Fragment}from "react";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+import React ,{useEffect,useState}from "react";
 import Table from "react-bootstrap/Table";
 import * as actions from "../actions/compnay";
-import {
-  Grid,
-  Paper,
-  List,
-} from "@material-ui/core";
+import Button from "react-bootstrap/Button";
+
+import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ComapnyData from './comapnyData';
 const Company = (props) => {
+    const[currentId,setCurrentId]=useState(0)
+    const [show, setShow] = useState(false);
+
     useEffect(() => {
         props.fetchAllCompanyData()
     }, [])
+    const onEditfun=(id)=>{
+        setCurrentId(id);
+        setShow(true);
+    }
+    const onDelete=id=>{
+        const onSuccess = () => {
+          window.alert("Successfully Deleted Company Data");
+        };
+        if(window.confirm("Are you Sure to Delete this record"))
+        props.deleteComapnydata(id,onSuccess)
+    }
     return (
-      <Grid container>
-        <Grid item xs={3}>
-          <Paper>
-            <ComapnyData />
-          </Paper>
-        </Grid>
-        <Grid item xs={9}>
-          <Paper>
-            <div>List of Compay's</div>
+    <div>
+            <ComapnyData {...{currentId,setCurrentId,show,setShow}} />
+            <h3>List of Compay's</h3>
             <Table striped hover responsive>
               <thead>
                 <tr>
@@ -35,6 +40,7 @@ const Company = (props) => {
                   <th>logo</th>
                   <th>State</th>
                   <th>City</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -49,16 +55,32 @@ const Company = (props) => {
                       <td>{data.logo}</td>
                       <td>{data.state}</td>
                       <td>{data.city}</td>
+                      <td>
+                        <Button onClick={() => onEditfun(data.id)}>
+                          Edit
+                        </Button>
+                      </td>
+                      <td>
+                        <Button onClick={() => onDelete(data._id)}>
+                          Delete
+                        </Button>
+                      </td>
+                      {/* <td>
+                        <FontAwesomeIcon
+                          icon={faEdit}
+                          onClick={() => setCurrentId(data._id)}
+                        />
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          onClick={() => onDelete(data._id)}
+                        />
+                      </td> */}
                     </tr>
                   );
                 })}
               </tbody>
             </Table>
-            <List></List>
-          </Paper>
-        </Grid>
-     
-      </Grid>
+            </div>
     );
 }
 const mapStatetoProps=state=>({
@@ -66,5 +88,6 @@ postcompnatList:state.company.list
 })
  const mapActiontoProps = {
    fetchAllCompanyData: actions.fetchAll,
+   deleteComapnydata:actions.Delete,
  };
 export default connect(mapStatetoProps, mapActiontoProps)(Company);
