@@ -1,0 +1,3 @@
+[1010/144008.425:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Nikita Barbate\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\1cbf5fed-5439-4963-b252-5e19b7663729: The system cannot find the path specified. (0x3)
+[1010/144008.437:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Nikita Barbate\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\58d83ae9-d189-46d6-8459-b726c218bf4b: The system cannot find the path specified. (0x3)
+[1010/144008.438:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
